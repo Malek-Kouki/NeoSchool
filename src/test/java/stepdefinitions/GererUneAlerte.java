@@ -1,44 +1,43 @@
 package stepdefinitions;
 
-import Page.AccueilPage;
-import Page.AlerteWindowPage;
+import Page.AcceuilPage;
 import Page.AlertsPage;
+import Page.AlertsWindowsPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import junit.framework.Assert;
 
 public class GererUneAlerte {
-	AccueilPage pageAccueil = new AccueilPage(Hooks.driver);
-	AlerteWindowPage pageAlertWindow = new AlerteWindowPage(Hooks.driver);
+	AcceuilPage acceuil = new AcceuilPage(Hooks.driver);
+	AlertsWindowsPage alerteWindow = new AlertsWindowsPage(Hooks.driver);
 	AlertsPage pageAlert = new AlertsPage(Hooks.driver);
-
-
 	
-	@Given("je suis la page alertedemoQa")
-	public void je_suis_la_page_alertedemo_qa() {
-		pageAccueil.clickOnAlerteMenu();
-		pageAlertWindow.clickOnAlertMenu();
+	@Given("je suis dans la page alerte DemoQa")
+	public void je_suis_dans_la_page_alerte_demo_qa() {
+	    acceuil.isMenuInterractionDisplayed();
+	    acceuil.clickToMenuInterraction();
+	    alerteWindow.clickToMenuAlerte();
 	}
 
 	@When("je clique sur le bouton Click Button to see alert")
 	public void je_clique_sur_le_bouton_click_button_to_see_alert() {
-		pageAlert.clickOnButtonToSeeAlert();
+	    pageAlert.clickToBoutton();
 	}
-	
+
 	@Then("une alerte s'affiche")
 	public void une_alerte_s_affiche() {
-		pageAlert.CheckAlert();	    
+	    pageAlert.checkAlert();
 	}
 
 	@When("je clique sur OK de l'alerte")
 	public void je_clique_sur_ok_de_l_alerte() {
-		pageAlert.AcceptAlert();	    
+	    pageAlert.acceptAlert();
 	}
 
 	@Then("l'alerte disparait")
 	public void l_alerte_disparait() {
-		boolean ActualResult= pageAlert.IsAlertPresent();	
-		Assert.assertFalse("l'alrte doit disparaitre",ActualResult);
+	    boolean actualResult = pageAlert.isAlertPresent();
+	    Assert.assertFalse("L'alerte doit dissparaitre", actualResult);
 	}
 }
