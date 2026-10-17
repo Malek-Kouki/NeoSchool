@@ -16,13 +16,19 @@ public class AcceuilPage {
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 	}
 	
-	private final By menuInterraction = By.cssSelector("a[href='/alertsWindows']");
+	private final By menuAlerte = By.cssSelector("a[href='/alertsWindows']");
 	
 	public boolean isMenuInterractionDisplayed() {
-		return wait.until(ExpectedConditions.visibilityOfElementLocated(menuInterraction)).isDisplayed();
+		return wait.until(ExpectedConditions.visibilityOfElementLocated(menuAlerte)).isDisplayed();
 	}
 	
 	public void clickToMenuInterraction() {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(menuAlerte)).click();
+	}
+	
+	private final By menuInterraction = By.cssSelector("a[href='/interaction']");
+	
+	public void clickToInterraction() {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(menuInterraction)).click();
 	}
 }
