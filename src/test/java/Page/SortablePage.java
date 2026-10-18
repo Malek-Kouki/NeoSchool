@@ -18,6 +18,7 @@ public class SortablePage {
 	public SortablePage(WebDriver driver) {
 		this.driver = driver;
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+		this.action = new Actions(driver);
 	}
 
 	private final By menuList = By.cssSelector("#demo-tab-list");
@@ -73,11 +74,8 @@ public class SortablePage {
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(elementSix)).isDisplayed();
 	}
 	
-	WebElement webElementOne = driver.findElement(By.xpath("(//div[normalize-space()='One'])[1]"));
-	WebElement webElementThree = driver.findElement(By.xpath("(//div[normalize-space()='Three'])[1]"));
-	WebElement firstPosition = driver.findElement(By.xpath("(//div[contains(@class,'list-group')]//div[contains(@class,'list-group-item list-group-item-action')])[1]"));
-	
 	public void clickToElement() {
+		WebElement webElementThree = driver.findElement(By.xpath("(//div[normalize-space()='Three'])[1]"));
 		// clickAndHold c'est une fonction qui prend en parametre une variable de type webElement
 		// clickAndHold prépare l'action (je click et je maintien sur l'élément Three)
 		//perform pour exécuter l'action de clickAndHold
@@ -85,6 +83,7 @@ public class SortablePage {
 	}
 	
 	public void elementThreeEnSurbreillance() {
+		WebElement webElementThree = driver.findElement(By.xpath("(//div[normalize-space()='Three'])[1]"));
 		String couleurElementSelectionne = webElementThree.getCssValue("Background-color");
 		System.out.print("la couleur de l'élément sélectionné est" + couleurElementSelectionne);
 		String couleurAttendu = "rgba(233.236.239.1)";
@@ -92,7 +91,15 @@ public class SortablePage {
 	}
 	
 	public void dragAndDropElement() {
+		WebElement webElementOne = driver.findElement(By.xpath("(//div[normalize-space()='One'])[1]"));
+		WebElement webElementThree = driver.findElement(By.xpath("(//div[normalize-space()='Three'])[1]"));
 		action.dragAndDrop(webElementThree, webElementOne).perform();
+	}
+	
+	public void dragAndDropSeconMethod() {
+		WebElement webElementOne = driver.findElement(By.xpath("(//div[normalize-space()='One'])[1]"));
+		WebElement webElementThree = driver.findElement(By.xpath("(//div[normalize-space()='Three'])[1]"));
+		action.clickAndHold(webElementThree).pause(Duration.ofSeconds(6)).moveToElement(webElementOne).pause(Duration.ofSeconds(6)).release().pause(Duration.ofSeconds(6)).perform();
 	}
 	
 	public void relacherElement() {
@@ -100,6 +107,7 @@ public class SortablePage {
 	}
 	
 	public String verifierTextPositonOne() {
+		WebElement firstPosition = driver.findElement(By.xpath("(//div[contains(@class,'list-group')]//div[contains(@class,'list-group-item list-group-item-action')])[1]"));
 		String firstPositionValue = firstPosition.getText();
 		return firstPositionValue;
 	}

@@ -15,7 +15,7 @@ public class ReordonnerUnElement {
 
 	@Given("Je suis dans l'onglet sortable")
 	public void je_suis_dans_l_onglet_sortable() {
-	    acceuil.clickToMenuInterraction();
+	    acceuil.clickToInterraction();
 	    interraction.clickToMenuSortable();
 	}
 
@@ -71,10 +71,11 @@ public class ReordonnerUnElement {
 
 	@When("Faire glisser {string} vers la position de {string}")
 	public void faire_glisser_vers_la_position_de(String string, String string2) {
-	    sortable.clickToElement();
-	    sortable.elementThreeEnSurbreillance();
-	    sortable.dragAndDropElement();
-	    sortable.relacherElement();
+	    //sortable.clickToElement();
+	    //sortable.elementThreeEnSurbreillance();
+	    //sortable.dragAndDropElement();
+	    //sortable.relacherElement();
+		sortable.dragAndDropSeconMethod();
 	}
 
 	@Then("L'element {string} apparaît à la premiére position")

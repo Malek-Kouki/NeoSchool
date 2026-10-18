@@ -22,10 +22,6 @@ public class AcceuilPage {
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(menuAlerte)).isDisplayed();
 	}
 	
-	public void clickToMenuInterraction() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(menuAlerte)).click();
-	}
-	
 	private final By menuInterraction = By.cssSelector("a[href='/interaction']");
 	
 	public void clickToInterraction() {
