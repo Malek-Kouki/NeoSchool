@@ -18,8 +18,12 @@ public class AcceuilPage {
 	
 	private final By menuAlerte = By.cssSelector("a[href='/alertsWindows']");
 	
-	public boolean isMenuInterractionDisplayed() {
+	public boolean isMenuAlerteFrameWindowDisplayed() {
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(menuAlerte)).isDisplayed();
+	}
+	
+	public void clickToAlertFrameWindow() {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(menuAlerte)).click();
 	}
 	
 	private final By menuInterraction = By.cssSelector("a[href='/interaction']");

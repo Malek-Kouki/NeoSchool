@@ -15,8 +15,8 @@ public class GererUneAlerte {
 	
 	@Given("je suis dans la page alerte DemoQa")
 	public void je_suis_dans_la_page_alerte_demo_qa() {
-	    acceuil.isMenuInterractionDisplayed();
-	    acceuil.clickToMenuInterraction();
+	    acceuil.isMenuAlerteFrameWindowDisplayed();
+	    acceuil.clickToAlertFrameWindow();
 	    alerteWindow.clickToMenuAlerte();
 	}
 
