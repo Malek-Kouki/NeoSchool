@@ -71,11 +71,15 @@ public class ReordonnerUnElement {
 
 	@When("Faire glisser {string} vers la position de {string}")
 	public void faire_glisser_vers_la_position_de(String string, String string2) {
-	    
+	    sortable.clickToElement();
+	    sortable.elementThreeEnSurbreillance();
+	    sortable.dragAndDropElement();
+	    sortable.relacherElement();
 	}
 
 	@Then("L'element {string} apparaît à la premiére position")
 	public void l_element_apparaît_à_la_premiére_position(String string) {
-	    
+	    String actualPosition = sortable.verifierTextPositonOne();
+	    Assert.assertEquals("la position one doit avoir l'élément Three", "Three", actualPosition);
 	}
 }

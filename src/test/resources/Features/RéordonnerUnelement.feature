@@ -1,3 +1,4 @@
+@ReordonnerListe
 Feature: Gestion des interractions
 
 	Scenario: Réordonner un élément
