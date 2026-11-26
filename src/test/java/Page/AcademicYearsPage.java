@@ -20,6 +20,12 @@ public class AcademicYearsPage {
 	private final By newAcademicYearsBoutton = By.xpath("//span[normalize-space()='New Academic Years']");
 	private final By popupMessage = By.cssSelector(".flex.w-full.gap-3.p-4");
 	private int initialCount;
+	private final By setCurrentBoutton = By.xpath("((//tr[contains(., '2026/2027') and .//*[normalize-space()='Set as Current']])[1]//*[normalize-space()='Set as Current'])[1]");
+	private final By currentAcademicModal = By.xpath("//div[contains(@class,'fi-modal-window') and not(contains(@style,'display: none'))]");
+	private final By confirmSetCurrentButton = By.xpath("(//button[@type='submit'])[2]");
+	public final By confirmTitleMessage = By.xpath("//h3[normalize-space()='Academic Year Switched Successfully']");
+	public final By confirmTextMessage = By.className("fi-no-notification-body");
+	public final By banniereVerte = By.xpath("(//div[contains(@class,'bg-green-400')])[2]");
 	
 	public boolean isOnAcademicYearsPage() {
 		String loginUrl = driver.getCurrentUrl();
@@ -61,5 +67,45 @@ public class AcademicYearsPage {
 	public boolean isNewAcademicYearAdded(String expectedYear) {
 		WebElement firstRow = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tbody/tr[1]")));
 		return firstRow.getText().contains(expectedYear);
+	}
+	
+	public void clickToCurrentButton() {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(setCurrentBoutton)).click();
+	}
+	
+	public boolean isSetAsCurrentModalDisplayed(String expectedTitle, String expectedMessage) {
+	    WebElement modal = wait.until(ExpectedConditions.visibilityOfElementLocated(currentAcademicModal));
+	    String fullText = modal.getText();
+	    return fullText.contains(expectedTitle) && fullText.contains(expectedMessage);
+	}
+	
+	public void clickConfirmSetCurrent() {
+	    WebElement confirmBtn = wait.until(ExpectedConditions.elementToBeClickable(confirmSetCurrentButton));
+	    confirmBtn.click();
+	}
+	
+	public boolean confirmTitleMessageIsDisplayed() {
+		return wait.until(ExpectedConditions.visibilityOfElementLocated(confirmTitleMessage)).isDisplayed();
+	}
+	
+	public boolean confirmTextMessageIsDisplayed() {
+		return wait.until(ExpectedConditions.visibilityOfElementLocated(confirmTextMessage)).isDisplayed();
+	}
+	
+	public boolean isBanniereVerteEnHautEtValide(String expectedMessage) {
+		WebElement banner = wait.until(ExpectedConditions.visibilityOfElementLocated(banniereVerte));
+		boolean isDisplayed = banner.isDisplayed();
+		int yPosition = banner.getRect().getY();
+	    boolean isAtTop = yPosition >= 0 && yPosition <= 250;
+		
+		String actualText = banner.getText().replaceAll("\\s+", " ").trim();
+		String expectedText = expectedMessage.replaceAll("\\s+", " ").trim();
+		
+		System.out.println("Actual text: [" + actualText + "]");
+	    System.out.println("Expected text: [" + expectedText + "]");
+	    System.out.println("Banner Y position: " + yPosition);
+	    
+		boolean textMatches = actualText.equalsIgnoreCase(expectedText) || actualText.contains(expectedText);
+		return isDisplayed && isAtTop && textMatches;
 	}
 }

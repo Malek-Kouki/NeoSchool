@@ -1,15 +1,7 @@
-@CreationAcademicYear
+@CreationAcademicYear @LoginAdmin
 Feature: Creation une annee academique
-	Background: Connexion préalable à l'application TC-01
-		Given Je suis dans la page Neoschool Sign in
-	    Then La page se charge correctement avec les champs "School Code", "Email address" et "Password visibles"
-	    When Saisir le school code "neoschool"
-	    And Saisir l'email "admin@neoschool.test"
-	    And Saisir le mot de passe "edupassword!"
-	    And Cliquer sur le bouton login
-	    Then La page Dashboard s'affiche
 
-	Scenario: Créer une année académique et l ajouter à la liste des années académiques
+	Scenario: TC-02 Créer une année académique et l ajouter à la liste des années académiques
 		When Je clic sur le menu Acadamic Years
 		Then La page Academic Years apparait
 		When Je clic sur le bouton New Academic Years

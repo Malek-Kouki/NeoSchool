@@ -9,7 +9,7 @@ import junit.framework.Assert;
 
 public class ConnexionNeoSchool {
 	SignInPage signIn = new SignInPage(Hooks.driver);
-	DashboardPage dashbordPage = new DashboardPage(Hooks.driver);
+	DashboardPage dashboardPage = new DashboardPage(Hooks.driver);
 	
 	@Given("Je suis dans la page Neoschool Sign in")
 	public void je_suis_dans_la_page_neoschool_sign_in() {
@@ -59,7 +59,7 @@ public class ConnexionNeoSchool {
 
 	@Then("La page Dashboard s'affiche")
 	public void la_page_dashboard_s_affiche() {
-		boolean isTitleDashboardPageResult = dashbordPage.titleDashboardPageIsDisplay();
+		boolean isTitleDashboardPageResult = dashboardPage.titleDashboardPageIsDisplay();
 		Assert.assertTrue("La page Dashboard s'affiche", isTitleDashboardPageResult);
 	}
 }

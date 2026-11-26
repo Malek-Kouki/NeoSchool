@@ -8,13 +8,13 @@ import io.cucumber.java.en.When;
 import junit.framework.Assert;
 
 public class CreationUneAnneeAcademique {
-	DashboardPage dashbordPage = new DashboardPage(Hooks.driver);
+	DashboardPage dashboardPage = new DashboardPage(Hooks.driver);
 	AcademicYearsPage academicYearsPage = new AcademicYearsPage(Hooks.driver);
 	CreateAcademicYearsPage createAcademicYearsPage = new CreateAcademicYearsPage(Hooks.driver);
 	
 	@When("Je clic sur le menu Acadamic Years")
 	public void je_clic_sur_le_menu_acadamic_years() {		
-		dashbordPage.clickToAcademicYearsMenu();
+		dashboardPage.clickToAcademicYearsMenu();
 	}
 
 	@Then("La page Academic Years apparait")

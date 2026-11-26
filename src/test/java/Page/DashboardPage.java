@@ -18,6 +18,11 @@ public class DashboardPage {
 	
 	private final By titleDashboardPage = By.className("fi-header-heading");
 	private final By academicYearsMenu = By.xpath("//span[normalize-space()='Academic Years']");
+	private final By termsBoutton = By.xpath("//span[normalize-space()='Terms']");
+	private final By studentsBoutton = By.xpath("//span[normalize-space()='Students']");
+	private final By teachersBoutton = By.xpath("//span[normalize-space()='Teachers']");
+	private final By levelsBoutton = By.xpath("//span[normalize-space()='Levels']");
+	private final By classesBoutton = By.xpath("//span[normalize-space()='Classes']");
 		
 	public boolean titleDashboardPageIsDisplay() {
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(titleDashboardPage)).isDisplayed();
@@ -25,5 +30,25 @@ public class DashboardPage {
 	
 	public void clickToAcademicYearsMenu() {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(academicYearsMenu)).click();
+	}
+	
+	public void clickToTerms() {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(termsBoutton)).click();
+	}
+	
+	public void clickToStudents() {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(studentsBoutton)).click();
+	}
+	
+	public void clickToTeachers() {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(teachersBoutton)).click();
+	}
+	
+	public void clickToLevels() {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(levelsBoutton)).click();
+	}
+	
+	public void clickToClasses() {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(classesBoutton)).click();
 	}
 }

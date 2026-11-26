@@ -55,7 +55,7 @@ public class Hooks {
     }
 
     // Pour lancer le driver
-    @Before
+    @Before(order = 1)
     public void beforeScenario(Scenario scenario) {
         initReportOnce();
 
@@ -65,6 +65,35 @@ public class Hooks {
         driver.get(baseUrl);
 
         test = extent.createTest(scenario.getName());
+    }
+    
+    @Before(value = "@LoginAdmin", order = 2)
+    public void loginAdminBeforeScenario() {
+        ConnexionNeoSchool connexion = new ConnexionNeoSchool();
+        connexion.je_suis_dans_la_page_neoschool_sign_in();
+        connexion.saisir_le_school_code("neoschool");
+        connexion.saisir_l_email("admin@neoschool.test");
+        connexion.saisir_le_mot_de_passe("edupassword!");
+        connexion.cliquer_sur_le_bouton_login();
+        connexion.la_page_dashboard_s_affiche();
+    }
+    
+ // 3ème @Before : sélectionne l'année académique courante après le login
+    @Before(value = "@SelectCurrentAcademicYear", order = 3)
+    public void selectCurrentAcademicYearBeforeScenario() {
+        SelectionUneAnneeAcademiqueCourante selectionAnnee = new SelectionUneAnneeAcademiqueCourante();
+        selectionAnnee.je_suis_dans_la_page_dashboard();
+        selectionAnnee.je_clic_sur_le_menu_academic_years();
+        selectionAnnee.la_page_apparait("Academic Years");
+        selectionAnnee.je_clic_sur_dans_la_page_dans_le_tableau_des_années_académiques_dans_la_ligne_de_l_année(
+                "Set as current", "Academic Years", "2026/2027");
+        selectionAnnee.la_fenetre_s_affiche(
+                "Set as Current Academic year This will Change the academic year of the school for all accounts.");
+        selectionAnnee.je_clic_sur_le_bouton("Confirm");
+        selectionAnnee.le_message_de_confirmation_suivant_s_affiche_academic_year_switched_successfully();
+        selectionAnnee.le_message_de_confirmation_suivant_s_affiche_you_have_successfully_switched_to_a_different_academic_year_your_data_are_scoped_accordingly();
+        selectionAnnee.une_bannière_verte_s_affiche_en_haut_de_la_page_avec_le_message_suivant(
+                "You're working in the Current Academic Year. 2026/2027");
     }
 
     // Screenshot si cas de test Failed / Ou Passed dans le rapport + état d'exécution
